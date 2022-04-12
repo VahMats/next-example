@@ -3,6 +3,7 @@ import * as React from "react"
 import { useState } from "react";
 import Conteiner from "../../components/Conteiner";
 import Image from "next/dist/client/image";
+import Head from "next/head";
 
 const blogPage = ( {blogsData} ) => {
 
@@ -22,6 +23,9 @@ const blogPage = ( {blogsData} ) => {
 
     return(
         <>
+            <Head>
+                <title>Blog page {blogData.id}</title>
+            </Head>
             <Conteiner>
                 <div className="col-span-full">
                     <Image layout="responsive" width={1} height={0.5} objectFit="cover" src={blogData.image.src} alt={blogData.image.alt} onClick={e=>{blogOpening(id);}}/>

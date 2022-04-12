@@ -2,6 +2,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+Before starting we need to install packages:
+
+npm i
+
 First, run the development server:
 
 ```bash
