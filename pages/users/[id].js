@@ -1,17 +1,40 @@
 import Conteiner from "../../components/Conteiner";
 import Head from "next/head";
 
-export const getServerSideProps = async (context) => {
-    const id = context.params.id;
-    const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
-    const userData = await res.json();
+// export const getServerSideProps = async (context) => {
+//     const id = context.params.id;
+//     const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+//     const userData = await res.json();
 
-    return{
-        props:{user:userData}
+//     return{
+//         props:{user:userData}
+//     }
+
+// }
+
+export const getStaticPaths = async () => {
+    const res = await fetch("https://jsonplaceholder.typicode.com/users");
+    const data = await res.json();
+
+    const paths = data.map(el=>({params: {id:el.id.toString()}}));
+
+    return {
+        paths,
+        fallback: false,
     }
-
 }
 
+export const getStaticProps = async ({ params }) => {
+    const id = params.id;
+    const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+    const data = await res.json();
+
+    return {
+        props:{
+            user:data
+        }
+    }
+}
 
 const Users = ({ user }) => {
     return(
